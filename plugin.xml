@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com.zsoftware.videoZ" version="1.0.0" 
+xmlns="http://apache.org/cordova/ns/plugins/1.0" 
+xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>小视频插件</name>
+    <js-module name="VideoZPlugin" src="www/video.js">
+        <clobbers target="videoZ" />
+    </js-module>
+
+ 		<name>小视频插件</name>
+    <description>
+        Android端的视频录制插件
+    </description>
+    <license>MIT</license>
+
+		 <engines>
+        <engine name="cordova" version=">=6.0.0" />
+    </engines>
+		
+	<platform name="android">
+		<source-file src="src/VideoZPlugin.java" 
+			target-dir="src/camerplugin/zsoftware/com/videoz"/>
+			
+		<config-file target="res/xml/config.xml" parent="/*">
+		  <feature name="VideoZPlugin">
+			<param name="android-package" value="camerplugin.zsoftware.com.videoz.VideoZPlugin"/>
+		  </feature>
+		</config-file>
+		
+		
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+	  		<activity   android:name="camerplugin.zsoftware.com.videoz.SmallVideoActivity"></activity>
+		</config-file>
+		
+		<config-file target="AndroidManifest.xml" parent="/manifest">
+				<uses-feature
+						android:name="android.hardware.camera"
+						android:required="true" />
+				<uses-feature android:name="android.hardware.camera.autofocus" />
+				<uses-permission android:name="android.permission.CAMERA" />
+				<uses-permission android:name="android.permission.RECORD_AUDIO" />
+				<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+				<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+				<uses-permission android:name="android.permission.WAKE_LOCK" />
+				<uses-permission android:name="android.permission.FLASHLIGHT" />
+		</config-file>
+		
+		<framework src="src/video.gradle" custom="true" type="gradleReference"/>
+		<resource-file src="src/videoz-release.aar" target="libs/videoz-release.aar"/>
+
+  </platform>
+</plugin>
